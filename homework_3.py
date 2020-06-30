@@ -1,5 +1,4 @@
-# 1. Python function, which will count how many times
-# a character (substring) is included in a string
+# TODO: Python function, which will count how many times a character (substring) is included in a string.
 
 
 def sum_letters(string_entered):
@@ -26,61 +25,95 @@ while True:
         break
 
 
-'''
-# 2. Find and replace a substring in a string for another substring.
-# User enter from a keyboard a string and both substrings.
+# TODO: Find and replace a substring in a string for another substring.
+
 
 def substring_replacement(string, substring_01, substring_02):
     len_01 = len(string)
     len_02 = len(substring_01)
-
-    print("len_01 = " + str(len_01))
-    print("len_02 = " + str(len_02))
-    can_be_replaced = False
+    len_03 = len(substring_02)
     j = 0
+    cannot_be_replaced = True
 
-    while j < len_01:
+    while j < len_01:  # length of the string entered
         if string[j] == substring_01[0]:
-            print("string[j] = " + string[j])
-            print("substring_01[0] = " + substring_01[0])
-            print("found a matching letter")
-
-            print("string[j:j + len_02] = " + string[j:j + len_02])
-            print("substring_01 = " + substring_01)
-
-            if (string[j:j + len_02] == substring_01):
+            if string[j:j + len_02] == substring_01:
                 print("found a matching substring")
-                print("string before replacement: " + string)
-                placement_for_string_rest = int[j:j+]
-                can_be_replaced = True
-
-            #else:
-            #    print("Invalid entry. No substring match has been found. Please try again!")
-
+                string = string[0:j] + substring_02 + string[j + len_02:]
+                print(f'Result String : ' + string)
+                cannot_be_replaced = False
+                break
         j += 1
-        if can_be_replaced:
-            print("in flag = true")
-
-            string = string[0:j] + substring_02[0:]
-            print("string after replacement: " + string)
-            break
+    if cannot_be_replaced:
+        print("No match for replacement has been found! Please try again.")
 
 
 while True:
-    can_be_replace = False
-    string = input("Please enter your String: ")
+    cannot_be_replaced = True
+    string = input("Please enter your String to test a substring replacement: ")
     substring_01 = input("Please enter the Substring to be replaced: ")
     substring_02 = input("Please enter the Substring to used for replacement: ")
-    substring_new_01 = ""
-    substring_new_02 = ""
-    substring_new_03 = ""
 
     if (string == "" and substring_01 == "" and substring_02 == "") or (
             not string.isalpha() and not substring_01.isalpha()) and not substring_02.isalpha():
-        print("Your input is not alphabatical. Please check your input and try again.")
+        print("Your input is not alphabetical. Please check your input and try again.")
         break
     else:
         print("going to execute a function")
         substring_replacement(string, substring_01, substring_02)
         break
-'''
+
+
+# TODO: Recursion for digital root.
+
+def sumdigits(num):
+    result = 0
+
+    while num > 0:
+        rem = num % 10
+        result = result + rem
+        num = int(num / 10)
+    return result
+
+
+def digitalroot(n):
+    r = sumdigits(n)
+    # print("r =" + str(r))
+    if r < 10:
+        return r
+    else:
+        return digitalroot(r)
+
+
+num = int(input("Enter a Number to test a digital root recursion: "))
+print("Digital root of {0} = {1}".format(num, digitalroot(num)))
+
+
+# TODO: Recursion for Fib.
+
+def fibsequence(n):
+    if n < 0:
+        print("Incorrect input")
+    # number is 0
+    elif n == 0:
+        return 0
+    # number is 1
+    elif n == 1:
+        return 1
+    else:
+        return fibsequence(n - 1) + fibsequence(n - 2)
+
+
+print("Fibsequence recursion result for {0} = {1}". format(6,fibsequence(6)))
+
+# TODO: Recursion for factorial.
+
+def factorial(x):
+    if x == 1:
+        return 1
+    else:
+        result = x * factorial(x - 1)
+        print("intermediate result for ", x, " : ", result)
+        return result
+
+print("Factorial recursion result for {0} = {1}". format(5,factorial(5)))
